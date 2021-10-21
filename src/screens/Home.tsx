@@ -1,157 +1,247 @@
-import React, { useState, useEffect } from "react";
 import { useNavigation } from "@react-navigation/core";
-
+import React, { useEffect } from "react";
 import {
-  View,
-  Text,
-  SafeAreaView,
-  TextInput,
-  TouchableOpacity,
+  Button,
   StyleSheet,
+  Text,
+  View,
+  SafeAreaView,
+  FlatList,
+  TouchableOpacity,
+  ActivityIndicator,
+  TextInput,
 } from "react-native";
+import { ListRenderItem } from "react-native";
+import { SearchBar } from "react-native-screens";
 
-// interface Props {
-//   navigation
-// }
+export type Props = {
+  count: number;
+  size: string;
+  text: string;
+};
 
-const Home = ({ navigation }) => {
-  // const Navigation = useNavigation();
-  const [asteroid, setAsteriod] = useState([]);
-  const [id, setId] = useState("");
-  const [box, setBox] = useState();
-  const [newValue, setNewValue] = useState();
-  const [collection, setCollection] = useState([]);
-  const [randomCard, setRandomCard] = useState([]);
+const Home: React.FC<Props> = ({ count = 1, navigation }) => {
+  const [pageCount, setPageCount] = React.useState(count);
+  const [searchKeyword, setSearchKeyWord] = React.useState("");
+  const [isSearching, setIsSearching] = React.useState(false);
+  const [list, setList] = React.useState([]);
+  const [loading, setLoading] = React.useState(false);
+  const [filterdCardList, setFilteredCardList] = React.useState([]);
+
+  // useEffect(() => {
+  //   setLoading(true);
+  //   // console.log(pageCount, 'page');
+  //   fetchApi();
+  //   const interval = setInterval(() => setPageCount(pageCount + 1), 10000);
+  //   return () => {
+  //     clearInterval(interval);
+  //   };
+  // }, [pageCount]);
 
   useEffect(() => {
     fetchApi();
-  }, []);
+    const interval = setInterval(() => setPageCount(pageCount + 1), 10000);
+    if (pageCount > 50) {
+      clearInterval(interval);
+    }
+    //   return () => {
+    //     clearInterval(interval);
+    //   };
+  }, [pageCount]);
 
   const fetchApi = async () => {
     const url =
-      "https://api.nasa.gov/neo/rest/v1/neo/browse?api_key=s9z25yR54KccLiaMvyNiDshjwF4g9IWTx7idnArE";
+      "https://hn.algolia.com/api/v1/search_by_date?tags=story&page=" +
+      pageCount;
 
     try {
-      const response = await fetch(url);
-      const details = await response.json();
-      setAsteriod(details.near_earth_objects);
-    } catch (error) {
-      console.log("Error");
-    }
-  };
-
-  const filterChange = () => {
-    if (collection != []) {
-      let item = asteroid.find((b) => b.id == id);
-      setCollection(item);
-      navigation.navigate("Detail", {
-        data: item,
+      const response = await fetch(url, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application",
+        },
       });
-    } else {
-      fetchApi();
+      const stories = await response.json();
+      setList(list.concat(stories.hits));
+      setLoading(false);
+      console.log("FETCH", list.length);
+    } catch (error) {
+      console.log(error);
     }
   };
 
-  const randomSelect = () => {
-    let card = asteroid[Math.floor(Math.random() * asteroid.length)];
-    setRandomCard(card);
+  const handleSearch = (text) => {
+    setSearchKeyWord(text);
+    if (text.length > 0) {
+      setIsSearching(true);
+      let temp = list;
+      var tempData = temp.filter((item) => {
+        return (
+          (item.title + item.author).toUpperCase().indexOf(text.toUpperCase()) >
+          -1
+        );
+      });
+      setFilteredCardList(tempData);
+      console.log(tempData, "LOGGING");
+    } else {
+      setIsSearching(false);
+    }
   };
+
+  const renderList = (item: any) => {
+    return (
+      <TouchableOpacity
+        testID="Controler"
+        onPress={(v) => {
+          navigation.navigate("Detail", {
+            data: item,
+          });
+        }}
+        style={styles.card}
+      >
+        <Text style={styles.title}>{item.item.title}</Text>
+        <Text style={styles.url}>{item.item.url}</Text>
+        <Text style={styles.created}>{item.item.created_at}</Text>
+        <Text style={styles.author}>{item.item.author}</Text>
+      </TouchableOpacity>
+    );
+  };
+
+  const renderFooter = () => {
+    return loading ? (
+      <View style={styles.footer}>
+        <ActivityIndicator size="large" />
+      </View>
+    ) : null;
+  };
+  // const renderMore = () => {
+  //   setPageCount(pageCount + 1);
+  //   setLoading(true);
+  // };
 
   return (
-    <SafeAreaView
-      style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
-    >
-      <View style={styles.randomBox}>
-        <Text style={styles.aster}>{randomCard.id}</Text>
-        <Text style={styles.name}>{randomCard.name}</Text>
-      </View>
-
-      <View style={styles.input}>
+    <SafeAreaView style={styles.container}>
+      <Text style={styles.header}>Posts</Text>
+      <View style={styles.textInput}>
         <TextInput
           testID="SearchBar"
-          placeholder="Enter ID"
-          value={id}
+          placeholder="Search"
+          value={searchKeyword}
+          placeholderTextColor={"#fff"}
           onChangeText={(text) => {
-            setId(text);
+            handleSearch(text);
           }}
-          placeholderTextColor="#ffff"
-          style={styles.textIn}
+          style={styles.input}
         />
       </View>
-
-      <View style={{ marginTop: 30 }}>
-        <TouchableOpacity
-          style={styles.button1}
-          disabled={id.length == 0 || asteroid.length == 0}
-          testID="View"
-          onPress={filterChange}
-        >
-          <Text style={styles.textIn}>View</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          disabled={asteroid.length == 0}
-          style={[styles.button2, { opacity: asteroid.length == 0 ? 0.2 : 1 }]}
-          onPress={() => {
-            randomSelect();
-          }}
-        >
-          <Text style={styles.textIn1}>Random</Text>
-        </TouchableOpacity>
-      </View>
+      {isSearching ? (
+        <FlatList
+          data={filterdCardList}
+          renderItem={renderList}
+          keyExtractor={(item) => item.url}
+          ListFooterComponent={renderFooter}
+        />
+      ) : (
+        <FlatList
+          data={list}
+          renderItem={renderList}
+          ListFooterComponent={renderFooter}
+          keyExtractor={(item) => item.url}
+        />
+      )}
     </SafeAreaView>
   );
 };
 
-export default Home;
-
 const styles = StyleSheet.create({
-  input: {
+  container: {
+    flex: 1,
+  },
+  greeting: {
+    fontSize: 20,
+    fontWeight: "bold",
+    margin: 16,
+  },
+  header: {
+    alignSelf: "center",
+    fontSize: 24,
+    color: "#567567",
+    fontWeight: "bold",
+  },
+  card: {
+    alignSelf: "center",
     width: "80%",
-    backgroundColor: "#345565",
+    borderWidth: 1,
+    borderRadius: 10,
+    paddingHorizontal: 20,
+    paddingVertical: 30,
+    marginBottom: 20,
+    backgroundColor: "#87ceea",
+    shadowColor: "#000",
+  },
+  title: {
+    textAlign: "center",
+    fontSize: 20,
+    fontWeight: "bold",
+    paddingBottom: 10,
+  },
+  url: {
+    textAlign: "center",
+    fontSize: 10,
+    fontWeight: "bold",
+    paddingBottom: 10,
+  },
+  created: {
+    textAlign: "center",
+    fontSize: 15,
+    fontWeight: "bold",
+    paddingBottom: 10,
+  },
+  author: {
+    textAlign: "center",
+    fontSize: 20,
+    fontWeight: "bold",
+  },
+  footer: {
+    marginTop: 10,
+    alignSelf: "center",
+  },
+  textInput: {
+    alignSelf: "center",
+    width: "80%",
     padding: 20,
-    borderRadius: 15,
+    backgroundColor: "#234678",
+    borderRadius: 10,
+    marginVertical: 25,
   },
-  textIn: {
+  input: {
     color: "#fff",
-    fontSize: 15,
-    fontWeight: "bold",
-    textAlign: "center",
-  },
-  textIn1: {
-    color: "#000",
-    fontSize: 15,
-    fontWeight: "bold",
-  },
-  button1: {
-    paddingHorizontal: 30,
-    paddingVertical: 15,
-    backgroundColor: "#ff3456",
-    borderRadius: 15,
-    marginBottom: 25,
-  },
-  button2: {
-    paddingHorizontal: 30,
-    paddingVertical: 15,
-    backgroundColor: "#ff3",
-    borderRadius: 15,
-    marginBottom: 25,
-  },
-  randomBox: {
-    position: "absolute",
-    top: 80,
-  },
-  name: {
-    fontSize: 20,
-    fontWeight: "bold",
-    color: "blue",
-    textAlign: "center",
-    paddingTop: 10,
-  },
-  aster: {
-    fontSize: 20,
-    fontWeight: "bold",
-    color: "green",
-    textAlign: "center",
+    fontSize: 16,
+    fontWeight: "600",
   },
 });
+
+export default Home;
+
+// const SearchItems = (text: any, list: any) => {
+//   if (text) {
+//     const newData = list.filter(i => {
+//       const itemData = i.author
+//         ? i.author.toUpperCase()
+//         : ''.toUpperCase() || i.title
+//         ? i.title.toUpperCase()
+//         : ''.toUpperCase() || i.created_at
+//         ? i.created_at.toUpperCase()
+//         : ''.toUpperCase();
+
+//       const textData = text.toUpperCase();
+//       return itemData.indexOf(textData) > -1;
+//     });
+//     setList(newData);
+//     setSearch(text);
+//     setLoading(false);
+//   } else {
+//     setList(list);
+//     setSearch(text);
+//   }
+// };

@@ -1,51 +1,33 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders correctly 1`] = `
+exports[`Render Correctly 1`] = `
 <RCTSafeAreaView
   emulateUnlessSupported={true}
   style={
     Object {
-      "alignItems": "center",
       "flex": 1,
-      "justifyContent": "center",
     }
   }
 >
-  <View
+  <Text
     style={
       Object {
-        "position": "absolute",
-        "top": 80,
+        "alignSelf": "center",
+        "color": "#567567",
+        "fontSize": 24,
+        "fontWeight": "bold",
       }
     }
   >
-    <Text
-      style={
-        Object {
-          "color": "green",
-          "fontSize": 20,
-          "fontWeight": "bold",
-          "textAlign": "center",
-        }
-      }
-    />
-    <Text
-      style={
-        Object {
-          "color": "blue",
-          "fontSize": 20,
-          "fontWeight": "bold",
-          "paddingTop": 10,
-          "textAlign": "center",
-        }
-      }
-    />
-  </View>
+    Posts
+  </Text>
   <View
     style={
       Object {
-        "backgroundColor": "#345565",
-        "borderRadius": 15,
+        "alignSelf": "center",
+        "backgroundColor": "#234678",
+        "borderRadius": 10,
+        "marginVertical": 25,
         "padding": 20,
         "width": "80%",
       }
@@ -54,15 +36,14 @@ exports[`renders correctly 1`] = `
     <TextInput
       allowFontScaling={true}
       onChangeText={[Function]}
-      placeholder="Enter ID"
-      placeholderTextColor="#ffff"
+      placeholder="Search"
+      placeholderTextColor="#fff"
       rejectResponderTermination={true}
       style={
         Object {
           "color": "#fff",
-          "fontSize": 15,
-          "fontWeight": "bold",
-          "textAlign": "center",
+          "fontSize": 16,
+          "fontWeight": "600",
         }
       }
       testID="SearchBar"
@@ -70,81 +51,36 @@ exports[`renders correctly 1`] = `
       value=""
     />
   </View>
-  <View
-    style={
-      Object {
-        "marginTop": 30,
-      }
-    }
+  <RCTScrollView
+    ListFooterComponent={[Function]}
+    data={Array []}
+    disableVirtualization={false}
+    getItem={[Function]}
+    getItemCount={[Function]}
+    horizontal={false}
+    initialNumToRender={10}
+    keyExtractor={[Function]}
+    maxToRenderPerBatch={10}
+    onContentSizeChange={[Function]}
+    onEndReachedThreshold={2}
+    onLayout={[Function]}
+    onMomentumScrollEnd={[Function]}
+    onScroll={[Function]}
+    onScrollBeginDrag={[Function]}
+    onScrollEndDrag={[Function]}
+    removeClippedSubviews={false}
+    renderItem={[Function]}
+    scrollEventThrottle={50}
+    stickyHeaderIndices={Array []}
+    updateCellsBatchingPeriod={50}
+    viewabilityConfigCallbackPairs={Array []}
+    windowSize={21}
   >
-    <View
-      accessible={true}
-      focusable={true}
-      onClick={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      style={
-        Object {
-          "backgroundColor": "#ff3456",
-          "borderRadius": 15,
-          "marginBottom": 25,
-          "opacity": 1,
-          "paddingHorizontal": 30,
-          "paddingVertical": 15,
-        }
-      }
-      testID="View"
-    >
-      <Text
-        style={
-          Object {
-            "color": "#fff",
-            "fontSize": 15,
-            "fontWeight": "bold",
-            "textAlign": "center",
-          }
-        }
-      >
-        View
-      </Text>
+    <View>
+      <View
+        onLayout={[Function]}
+      />
     </View>
-    <View
-      accessible={true}
-      focusable={true}
-      onClick={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      style={
-        Object {
-          "backgroundColor": "#ff3",
-          "borderRadius": 15,
-          "marginBottom": 25,
-          "opacity": 0.2,
-          "paddingHorizontal": 30,
-          "paddingVertical": 15,
-        }
-      }
-    >
-      <Text
-        style={
-          Object {
-            "color": "#000",
-            "fontSize": 15,
-            "fontWeight": "bold",
-          }
-        }
-      >
-        Random
-      </Text>
-    </View>
-  </View>
+  </RCTScrollView>
 </RCTSafeAreaView>
 `;

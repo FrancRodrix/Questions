@@ -1,59 +1,71 @@
 import { useNavigation } from "@react-navigation/core";
 import React from "react";
 import {
-  View,
-  Text,
-  TouchableOpacity,
-  SafeAreaView,
   StyleSheet,
+  Text,
+  View,
+  SafeAreaView,
+  TouchableOpacity,
 } from "react-native";
 
 interface Props {
   navigation;
 }
 
-const Detail = (props: Props) => {
-  const Item = props.route.params.data;
-
+export default function Detail(props: Props) {
   return (
     <SafeAreaView style={styles.mainContainer}>
       <TouchableOpacity
-        style={styles.back}
+        style={styles.button}
         onPress={() => {
           navigation.goBack();
         }}
       >
         <Text>GO BACK</Text>
       </TouchableOpacity>
-      <View style={styles.box}>
-        <Text style={{ textAlign: "center" }}>{Item.name}</Text>
-        <Text style={{ textAlign: "center" }}>{Item.name_limited}</Text>
-        <Text style={{ textAlign: "center" }}>{Item.designation}</Text>
+      <View style={styles.json}>
+        <Text>{JSON.stringify(props.route.params.data)}</Text>
       </View>
     </SafeAreaView>
   );
-};
-
-export default Detail;
+}
 
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#fe4",
+    backgroundColor: "#e67845",
   },
-  back: {
+  title: {
+    textAlign: "center",
+    fontSize: 20,
+    fontWeight: "bold",
+    paddingBottom: 10,
+  },
+  url: {
+    textAlign: "center",
+    fontSize: 10,
+    fontWeight: "bold",
+    paddingBottom: 10,
+  },
+  created: {
+    textAlign: "center",
+    fontSize: 15,
+    fontWeight: "bold",
+    paddingBottom: 10,
+  },
+  author: {
+    textAlign: "center",
+    fontSize: 20,
+    fontWeight: "bold",
+  },
+  button: {
     position: "absolute",
-    top: 60,
-    left: 30,
+    top: 70,
+    left: 40,
   },
-  box: {
-    alignSelf: "center",
-    borderWidth: 1,
-    borderRadius: 10,
-    padding: 20,
-
-    backgroundColor: "#fef",
+  json: {
+    marginHorizontal: 20,
   },
 });
