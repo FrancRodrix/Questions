@@ -1,0 +1,150 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<RCTSafeAreaView
+  emulateUnlessSupported={true}
+  style={
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "justifyContent": "center",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "position": "absolute",
+        "top": 80,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "green",
+          "fontSize": 20,
+          "fontWeight": "bold",
+          "textAlign": "center",
+        }
+      }
+    />
+    <Text
+      style={
+        Object {
+          "color": "blue",
+          "fontSize": 20,
+          "fontWeight": "bold",
+          "paddingTop": 10,
+          "textAlign": "center",
+        }
+      }
+    />
+  </View>
+  <View
+    style={
+      Object {
+        "backgroundColor": "#345565",
+        "borderRadius": 15,
+        "padding": 20,
+        "width": "80%",
+      }
+    }
+  >
+    <TextInput
+      allowFontScaling={true}
+      onChangeText={[Function]}
+      placeholder="Enter ID"
+      placeholderTextColor="#ffff"
+      rejectResponderTermination={true}
+      style={
+        Object {
+          "color": "#fff",
+          "fontSize": 15,
+          "fontWeight": "bold",
+          "textAlign": "center",
+        }
+      }
+      testID="SearchBar"
+      underlineColorAndroid="transparent"
+      value=""
+    />
+  </View>
+  <View
+    style={
+      Object {
+        "marginTop": 30,
+      }
+    }
+  >
+    <View
+      accessible={true}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "backgroundColor": "#ff3456",
+          "borderRadius": 15,
+          "marginBottom": 25,
+          "opacity": 1,
+          "paddingHorizontal": 30,
+          "paddingVertical": 15,
+        }
+      }
+      testID="View"
+    >
+      <Text
+        style={
+          Object {
+            "color": "#fff",
+            "fontSize": 15,
+            "fontWeight": "bold",
+            "textAlign": "center",
+          }
+        }
+      >
+        View
+      </Text>
+    </View>
+    <View
+      accessible={true}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "backgroundColor": "#ff3",
+          "borderRadius": 15,
+          "marginBottom": 25,
+          "opacity": 0.2,
+          "paddingHorizontal": 30,
+          "paddingVertical": 15,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "color": "#000",
+            "fontSize": 15,
+            "fontWeight": "bold",
+          }
+        }
+      >
+        Random
+      </Text>
+    </View>
+  </View>
+</RCTSafeAreaView>
+`;

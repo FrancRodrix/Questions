@@ -6,6 +6,7 @@ exports[`renders correctly 1`] = `
   style={
     Object {
       "alignItems": "center",
+      "backgroundColor": "#fe4",
       "flex": 1,
       "justifyContent": "center",
     }
@@ -23,10 +24,10 @@ exports[`renders correctly 1`] = `
     onStartShouldSetResponder={[Function]}
     style={
       Object {
-        "left": 50,
+        "left": 30,
         "opacity": 1,
         "position": "absolute",
-        "top": 70,
+        "top": 60,
       }
     }
   >
@@ -38,85 +39,39 @@ exports[`renders correctly 1`] = `
     style={
       Object {
         "alignSelf": "center",
-        "backgroundColor": "#3D85C6",
+        "backgroundColor": "#fef",
         "borderRadius": 10,
         "borderWidth": 1,
-        "padding": 10,
-        "width": "80%",
+        "padding": 20,
       }
     }
   >
     <Text
       style={
         Object {
-          "fontSize": 18,
-          "fontWeight": "600",
-          "paddingBottom": 10,
           "textAlign": "center",
         }
       }
     >
-      CLIMATE CONDITIONS
+      xys
     </Text>
     <Text
       style={
         Object {
-          "fontSize": 14,
-          "paddingVertical": 3,
           "textAlign": "center",
         }
       }
     >
-       TEMPERATURE:
-      Delhi
+      cvb
     </Text>
     <Text
       style={
         Object {
-          "fontSize": 14,
-          "paddingVertical": 3,
           "textAlign": "center",
         }
       }
     >
-       HUMIDITY:
-      India
-    </Text>
-    <Text
-      style={
-        Object {
-          "fontSize": 14,
-          "paddingVertical": 3,
-          "textAlign": "center",
-        }
-      }
-    >
-      CLOUDCOVER
-      12345
-    </Text>
-    <Text
-      style={
-        Object {
-          "fontSize": 14,
-          "paddingVertical": 3,
-          "textAlign": "center",
-        }
-      }
-    >
-      WEATHER DISCRIPTION:
-      Sunny
-    </Text>
-    <Text
-      style={
-        Object {
-          "fontSize": 14,
-          "paddingVertical": 3,
-          "textAlign": "center",
-        }
-      }
-    >
-      CITY:
-      delhi
+      asd
     </Text>
   </View>
 </RCTSafeAreaView>
