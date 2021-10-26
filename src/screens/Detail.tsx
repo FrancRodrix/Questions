@@ -9,7 +9,7 @@ import {
 } from "react-native";
 
 interface Props {
-  navigation;
+  navigation:any;
 }
 
 export default function Detail(props: Props) {
@@ -18,7 +18,7 @@ export default function Detail(props: Props) {
       <TouchableOpacity
         style={styles.button}
         onPress={() => {
-          navigation.goBack();
+          props.navigation.goBack();
         }}
       >
         <Text>GO BACK</Text>

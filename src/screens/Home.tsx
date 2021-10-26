@@ -44,9 +44,7 @@ const Home: React.FC<Props> = ({ count = 1, navigation }) => {
     if (pageCount > 50) {
       clearInterval(interval);
     }
-    //   return () => {
-    //     clearInterval(interval);
-    //   };
+   
   }, [pageCount]);
 
   const fetchApi = async () => {
