@@ -23,7 +23,7 @@ const Detail = (props: Props) => {
           navigation.goBack();
         }}
       >
-        <Text>GO BACK</Text>
+        <Text>Back</Text>
       </TouchableOpacity>
       <View style={styles.box}>
         <Text style={{ textAlign: "center" }}>{Item.name}</Text>
