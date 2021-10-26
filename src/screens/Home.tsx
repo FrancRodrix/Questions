@@ -28,15 +28,7 @@ const Home: React.FC<Props> = ({ count = 1, navigation }) => {
   const [loading, setLoading] = React.useState(false);
   const [filterdCardList, setFilteredCardList] = React.useState([]);
 
-  // useEffect(() => {
-  //   setLoading(true);
-  //   // console.log(pageCount, 'page');
-  //   fetchApi();
-  //   const interval = setInterval(() => setPageCount(pageCount + 1), 10000);
-  //   return () => {
-  //     clearInterval(interval);
-  //   };
-  // }, [pageCount]);
+ 
 
   useEffect(() => {
     fetchApi();
@@ -243,3 +235,13 @@ export default Home;
 //     setSearch(text);
 //   }
 // };
+
+ // useEffect(() => {
+  //   setLoading(true);
+  //   // console.log(pageCount, 'page');
+  //   fetchApi();
+  //   const interval = setInterval(() => setPageCount(pageCount + 1), 10000);
+  //   return () => {
+  //     clearInterval(interval);
+  //   };
+  // }, [pageCount]);
