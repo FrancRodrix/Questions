@@ -13,14 +13,13 @@ import Axios from "axios";
 import { padding } from "styled-system";
 
 interface Props {
-  navigation
+  navigation;
 }
 
-const HomeScreen = (props: Props) => {
+const HomeScreen = ({navigation}) => {
   const [keyWord, setKeyword] = useState("");
   const [api, setApi] = useState("https://restcountries.com/v2/name/");
   const [capital, setCapital] = useState("");
-  const [population, setPopulation] = useState("");
 
   const [countryList, setCountryList] = useState();
 
@@ -31,6 +30,7 @@ const HomeScreen = (props: Props) => {
         // console.log(res.data, "FETCHED");
         setCapital(res.data);
         setCountryList(res.data);
+        console.log(res.data)
       });
     } catch (e) {
       console.log(e);
@@ -90,7 +90,9 @@ const HomeScreen = (props: Props) => {
         </View>
       </View>
 
-      <FlatList data={countryList} renderItem={renderItem} />
+      <FlatList data={countryList} 
+      renderItem={renderItem}
+      keyExtractor={item=>item.alpha2Code} />
     </SafeAreaView>
   );
 };
